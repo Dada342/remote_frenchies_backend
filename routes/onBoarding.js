@@ -6,7 +6,7 @@ const User = require('../models/users');
 
 router.put('/', (req, res) => {
 
-// Utilisation de la destructuration (ex: remote: req.body.checkboxes.remote)
+    // Utilisation de la destructuration (ex: remote: req.body.checkboxes.remote)
     const {
         remote,
         hybrid,
@@ -22,18 +22,12 @@ router.put('/', (req, res) => {
     // 2 critères à renseigner (le critère de recherche et l'élément à mettre à jour)
     User.updateOne({ token: req.body.token }, { on_boarding: { remote, hybrid, interested_in_teleworking, encounter, share_skills, share_hobbies, welcome_remoters, go_to_remoters, both, } })
         .then(result => {
-            console.log(req.body)
-            console.log( 'object consologué: ', remote)
-            console.log(result)
             if (result.modifiedCount > 0) {
-                
                 res.json({ result: true, message: 'Mise à jour réussie' });
-                
-               
             } else {
                 res.json({ result: false, error: 'Préférences déjà existentes' });
             }
-            
+
         });
 });
 
@@ -52,3 +46,5 @@ router.get('/users/:userId', (req, res) => {
 });
 
 module.exports = router;
+
+

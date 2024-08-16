@@ -13,7 +13,7 @@ router.post('/messages', (req, res) => {
             if (!user) {
                 return res.json({ result: false, error: 'User not found' });
             }
-            console.log(text)
+
             // Création du nouveau message
             const newMessage = {
                 message: text,
@@ -49,8 +49,8 @@ router.post('/messages', (req, res) => {
                             user._id,
                             { $push: { discussion: savedDiscussion._id } },
                             { new: true }
-                            ).then((data) => {
-                            console.log('updated user', data, savedDiscussion._id)
+                        ).then((data) => {
+
                             res.json({ result: true, discussion: savedDiscussion });
                         });
                     });
